@@ -20,12 +20,13 @@ final class PieceRequestInterceptor: RequestInterceptor {
         }
         
         guard let refreshToken = KeyChain.read()?.refreshToken else {
-            completion(.doNotRetry)
+            completion(.doNotRetryWithError(error))
             return
         }
         
         
         AF.request("\(Bucket.BASE_URL)/auth/refresh",
+                   method: .post,
                    parameters: ["refreshToken": refreshToken],
                    encoding: JSONEncoding.default
         )
@@ -33,14 +34,17 @@ final class PieceRequestInterceptor: RequestInterceptor {
             switch response.result {
             case .success(let result):
                 if result.status == 200 {
+                    
                     if let data = result.data {
                         KeyChain.update(token: SigninResponse(accessToken: data.accessToken, refreshToken: refreshToken))
-                        completion(.retry)
+                        
                     }
                 }
                 else {
                     KeyChain.delete()
                 }
+                
+                completion(.doNotRetry)
                 
             case .failure(_):
                 completion(.doNotRetryWithError(error))

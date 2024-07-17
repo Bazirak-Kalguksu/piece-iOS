@@ -18,10 +18,11 @@ struct PointItem: View {
     
     let title: PointTitle
     let value: Int
+    let action: () -> ()
     
     var body: some View {
         Button {
-            
+            action()
         } label: {
             
             HStack {
@@ -53,5 +54,7 @@ struct PointItem: View {
 }
 
 #Preview {
-    PointItem(title: .point, value: 10)
+    PointItem(title: .point, value: 10) {
+        
+    }
 }

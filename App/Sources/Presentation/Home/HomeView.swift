@@ -18,7 +18,6 @@ struct HomeView: View {
                     VStack(spacing: 0) {
                         Spacer()
                         
-                        
                         PieceAsset.Vector.homeLogo.swiftUIImage
                             .resizable()
                             .frame(maxWidth: 166, maxHeight: 42)
@@ -27,7 +26,8 @@ struct HomeView: View {
                 }
             
             
-            PieceSearchField(text: .constant(""))
+            PieceSearchField()
+                .environmentObject(homeVM)
             
             ScrollView {
                 Spacer(minLength: 10)
@@ -49,6 +49,7 @@ struct HomeView: View {
                 
             }
             .refreshable {
+                homeVM.resetCampaigns()
                 homeVM.getCampaigns()
             }
                         

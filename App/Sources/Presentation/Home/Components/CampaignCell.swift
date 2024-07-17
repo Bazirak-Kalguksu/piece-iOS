@@ -1,8 +1,10 @@
 import SwiftUI
+import FlowKit
 
 struct CampaignCell: View {
     let model: CampaignResponse
     
+    @Flow var flow
     
     var body: some View {
         VStack {
@@ -58,7 +60,7 @@ struct CampaignCell: View {
         .background(Color.Gray.gray100.clipShape(RoundedRectangle(cornerRadius: 10)))
         .padding(.horizontal, 10)
         .onTapGesture {
-            
+            flow.push(CampaignView(model: model), animated: false)
         }
         
         

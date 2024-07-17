@@ -3,9 +3,12 @@ import FlowKit
 
 struct PieceBackButton: View {
     @Flow var flow
+    
+    let color: Color
     let action: (() -> ())?
     
-    init(action: (() -> Void)? = nil) {
+    init(color: Color = Color.black, action: (() -> Void)? = nil) {
+        self.color = color
         self.action = action
     }
     
@@ -16,7 +19,7 @@ struct PieceBackButton: View {
             PieceAsset.Icon.back.swiftUIImage
                 .resizable()
                 .frame(width: 18, height: 31)
-                .foregroundStyle(Color.black)
+                .foregroundStyle(color)
                 
         }
     }

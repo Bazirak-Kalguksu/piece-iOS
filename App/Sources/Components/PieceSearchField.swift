@@ -1,12 +1,13 @@
 import SwiftUI
 
 struct PieceSearchField: View {
-    @Binding var text: String
+    
+    @EnvironmentObject var homeVM: HomeViewModel
     
     var body: some View {
         HStack {
             Button { 
-                
+                homeVM.searchCampaigns()
             } label: {
                 PieceAsset.Icon.search.swiftUIImage
                     .foregroundStyle(Color.Blue.blue700)
@@ -16,12 +17,15 @@ struct PieceSearchField: View {
             
             TextField(
                 "SearchKey",
-                text: $text,
+                text: $homeVM.search,
                 prompt: Text("검색어를 입력해주세요")
                     .font(.pretendard(size: 15, weight: .w300))
                     .foregroundColor(Color.Gray.gray500)
             )
             .font(.pretendard(size: 15, weight: .w300))
+            .onSubmit {
+                homeVM.searchCampaigns()
+            }
             
             Spacer()
             
@@ -36,5 +40,6 @@ struct PieceSearchField: View {
 }
 
 #Preview {
-    PieceSearchField(text: .constant(""))
+    PieceSearchField()
+        .environmentObject(HomeViewModel())
 }

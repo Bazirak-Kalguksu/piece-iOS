@@ -3,6 +3,7 @@ import Alamofire
 
 class ProfileViewModel: ObservableObject {
     @Published var model: UserResponse = .init()
+    @Published var reloadValue: Int = 0
     
     let firstDateFormatter = DateFormatter()
     let secondDateFormatter = DateFormatter()
@@ -30,6 +31,29 @@ class ProfileViewModel: ObservableObject {
                     self.model = data
                 }
             case .failure(_):
+                break
+            }
+        }
+    }
+    
+    func chargeMoney( onComplete: @escaping () -> () ) {
+        AF.request("\(Bucket.BASE_URL)/user/charge-money",
+                   method: .patch,
+                   parameters: ["money": reloadValue],
+                   encoding: URLEncoding.default,
+                   interceptor: PieceRequestInterceptor()
+        )
+        .responseDecodable(of: BaseResponse<Empty>.self) { response in
+            switch response.result {
+            case .success(let result):
+                print("result : \(result)")
+                if result.status == 200 {
+                    onComplete()
+                    
+                }
+            case .failure(let error):
+                
+                print("error : \(error.localizedDescription)")
                 break
             }
         }
