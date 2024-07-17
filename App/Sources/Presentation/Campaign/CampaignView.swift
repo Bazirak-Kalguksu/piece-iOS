@@ -20,7 +20,7 @@ struct CampaignView: View {
                     AsyncImage(url: url) { image in
                         image.image?
                             .resizable()
-                            
+                        
                     }
                 }
                 else {
@@ -53,7 +53,7 @@ struct CampaignView: View {
                 .font(.pretendard(size: 13, weight: .w500))
                 .foregroundStyle(Color.Blue.blue800)
             
-            Button { 
+            Button {
                 profileVM.openSheet()
             } label: {
                 RoundedRectangle(cornerRadius: 10)
@@ -68,11 +68,11 @@ struct CampaignView: View {
             .sheet(isPresented: $profileVM.donationSheetCondition) {
                 DonationView()
                     .environmentObject(profileVM)
-                    
-                .presentationDragIndicator(.visible)
-                .presentationDetents([
-                    .height(300)
-                ])
+                
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([
+                        .height(300)
+                    ])
                 
                 
             }
@@ -88,15 +88,18 @@ struct CampaignView: View {
             }
             
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    
-                } label: {
-                    PieceAsset.Icon.share.swiftUIImage
-                        .resizable()
-                        .frame(width: 38, height: 38)
-                        .foregroundStyle(Color.black)
-
-                }
+                ShareLink(
+                    item: URL(string: model.imageUrl)!,
+                    label: { Label(
+                        title: { },
+                        icon: { PieceAsset.Icon.share.swiftUIImage
+                                .resizable()
+                                .frame(width: 38, height: 38)
+                                .foregroundStyle(Color.black)
+                            }
+                    )}
+                )
+                
             }
         }
         .navigationBarBackButtonHidden()
