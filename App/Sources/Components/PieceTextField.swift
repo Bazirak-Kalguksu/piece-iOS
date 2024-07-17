@@ -3,12 +3,16 @@ import SwiftUI
 struct PieceTextField: View {
     let prompt: String
     @Binding var text: String
+    let contentType: UITextContentType?
     let icon: Image
     let isSecure: Bool
     
-    init(prompt: String, text: Binding<String>, icon: Image, isSecure: Bool = false) {
+    @FocusState private var onFocus: Bool
+    
+    init(prompt: String, text: Binding<String>, contentType: UITextContentType? = .none, icon: Image, isSecure: Bool = false) {
         self.prompt = prompt
         self._text = text
+        self.contentType = contentType
         self.icon = icon
         self.isSecure = isSecure
     }
@@ -40,10 +44,12 @@ struct PieceTextField: View {
                             .foregroundColor(.Gray.gray500)
                             .font(.pretendard(size: 16))
                     )
-                    .textContentType(.newPassword)
+                    
                 }
                 
             }
+            .focused($onFocus)
+            .textContentType(contentType)
             .foregroundStyle(Color.black)
             .font(.pretendard(size: 16))
             
@@ -54,7 +60,15 @@ struct PieceTextField: View {
         .autocorrectionDisabled()
         .textInputAutocapitalization(.never)
         .padding(18)
-        .background(Color.Gray.gray100.clipShape(RoundedRectangle(cornerRadius: 5)))
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .strokeBorder(onFocus ? Color.Blue.blue500 : Color.clear)
+                .foregroundStyle(Color.clear)
+                .background(
+                    Color.Gray.gray100
+                        .clipShape(RoundedRectangle(cornerRadius: 5))
+                )
+        )
         .padding(.horizontal, 24)
     }
 }

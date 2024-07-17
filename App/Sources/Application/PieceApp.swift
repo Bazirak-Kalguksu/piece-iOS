@@ -1,12 +1,11 @@
 import SwiftUI
+import FlowKit
 
 @main
 struct PieceApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                ContentView()
-            }
+            FlowPresenter(rootView: MainNavigationView())
         }
     }
 }

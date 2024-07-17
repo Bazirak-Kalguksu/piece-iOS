@@ -5,8 +5,16 @@ let dependencies = Dependencies(
     swiftPackageManager: SwiftPackageManagerDependencies(
         [
             .remote(
+                url: "https://github.com/Alamofire/Alamofire.git",
+                requirement: .upToNextMinor(from: "5.0.0")
+            ),
+            .remote(
                 url: "https://github.com/Moya/Moya.git",
-                requirement: .upToNextMajor(from: "15.0.0")
+                requirement: .branch("master")
+            ),
+            .remote(
+                url: "https://github.com/Mercen-Lee/FlowKit.git",
+                requirement: .branch("main")
             )
         ],
         baseSettings: .settings(
