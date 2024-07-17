@@ -27,11 +27,6 @@ struct CampaignCell: View {
             
             
             
-            
-            .onTapGesture {
-                
-            }
-            
             HStack {
                 VStack(alignment: .leading) {
                     Text(model.title)
@@ -41,7 +36,9 @@ struct CampaignCell: View {
                 
                 Spacer()
                 
-                Button { } label: {
+                Button {
+                    
+                } label: {
                     
                     Text("후원하기")
                         .font(.pretendard(size: 15, weight: .w500))
@@ -60,6 +57,10 @@ struct CampaignCell: View {
         .padding(10)
         .background(Color.Gray.gray100.clipShape(RoundedRectangle(cornerRadius: 10)))
         .padding(.horizontal, 10)
+        .onTapGesture {
+            
+        }
+        
         
         
     }

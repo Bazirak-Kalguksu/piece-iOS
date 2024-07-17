@@ -35,17 +35,24 @@ struct HomeView: View {
                 VStack(spacing: 22) {
                     ForEach(homeVM.campaigns, id: \.idx) { item in
                         CampaignCell(model: item)
+                            .task {
+                                if homeVM.hasReachedEnd(of: item) {
+                                    await homeVM.nextCampaigns()
+                                }
+                            }
                     }
+                    
                 }
+                
                 
                 Spacer(minLength: 80)
                 
             }
+            .refreshable {
+                homeVM.getCampaigns()
+            }
                         
             
-        }
-        .onAppear {
-            homeVM.getCampaigns()
         }
         .ignoresSafeArea()
 

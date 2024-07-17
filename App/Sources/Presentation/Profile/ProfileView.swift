@@ -3,6 +3,7 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var mainVM: MainNavigationViewModel
     @StateObject var profileVM = ProfileViewModel()
+
     
     var body: some View {
         VStack(spacing: 26) {
@@ -37,9 +38,6 @@ struct ProfileView: View {
             }
             
             
-        }
-        .onAppear {
-            profileVM.getProfile()
         }
     }
 }
