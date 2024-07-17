@@ -1,4 +1,5 @@
 import SwiftUI
+import Alamofire
 
 class SignupViewModel: ObservableObject {
     @Published var name: String = ""
@@ -6,4 +7,8 @@ class SignupViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
+    
+    func signup() {
+        AF.request()
+    }
 }
