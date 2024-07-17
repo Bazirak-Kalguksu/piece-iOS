@@ -42,7 +42,7 @@ struct SigninView: View {
                 
                 PieceButton(title: "로그인") {
                     signinVM.signin {
-                        
+                        mainVM.selection = .home
                         mainVM.objectWillChange.send()
                         
                     } onError: {

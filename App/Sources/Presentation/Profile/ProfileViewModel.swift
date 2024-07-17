@@ -11,6 +11,7 @@ class ProfileViewModel: ObservableObject {
     @Published var model: UserResponse = .init()
     @Published var reloadValue: Int = 0
     @Published var donationSheetCondition: Bool = false
+    @Published var shareSheetCondition: Bool = false
     
     let firstDateFormatter = DateFormatter()
     let secondDateFormatter = DateFormatter()
@@ -55,6 +56,8 @@ class ProfileViewModel: ObservableObject {
             
         }
     }
+    
+    
     
     func getProfile() {
         AF.request("\(Bucket.BASE_URL)/user",

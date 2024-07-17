@@ -104,5 +104,7 @@ struct CampaignView: View {
 }
 
 #Preview {
-    CampaignView(model: .init(title: "출산키트 캠페인", description: "만삭의 몸으로 수백 킬로를 걷다가", idx: 1, imageUrl: ""))
+    FlowPresenter(rootView: CampaignView(model: .init(title: "출산키트 캠페인", description: "만삭의 몸으로 수백 킬로를 걷다가", idx: 1, imageUrl: ""))
+        .environmentObject(ProfileViewModel()))
+    
 }
