@@ -9,6 +9,7 @@ public extension Color {
 public extension Color.Blue {
     static let blue500: Color = PieceAsset.Blue.blue500.swiftUIColor
     static let blue600: Color = PieceAsset.Blue.blue600.swiftUIColor
+    static let blue650: Color = PieceAsset.Blue.blue650.swiftUIColor
     static let blue700: Color = PieceAsset.Blue.blue700.swiftUIColor
 }
 

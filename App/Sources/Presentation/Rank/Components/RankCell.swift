@@ -1,9 +1,13 @@
 import SwiftUI
 
 struct RankCell: View {
+    let id: Int
+    let name: String
+    let point: Int
+    
     var body: some View {
         HStack(spacing: 20) {
-            Text("4")
+            Text("\(id)")
                 .font(.pretendard(size: 32, weight: .w600))
                 .foregroundStyle(Color.Blue.blue500)
 
@@ -12,19 +16,23 @@ struct RankCell: View {
             
             PieceAsset.Icon.profile.swiftUIImage
                 .resizable()
-                .frame(maxWidth: 48, maxHeight: 48)
+                .frame(width: 48, height: 48)
                 .foregroundStyle(Color.Blue.blue500)
             
-            Text("권수현")
+            Text(name)
+                .font(.pretendard(size: 13))
             
             Spacer()
             
-            Text("89,000 P")
+            Text("\(point) P")
+                .font(.pretendard(size: 16, weight: .w800))
         }
-        .padding(.horizontal, 20)
+        .padding(20)
+        .background(Color.Gray.gray100.clipShape(RoundedRectangle(cornerRadius: 15)))
+        .padding(.horizontal, 24)
     }
 }
 
 #Preview {
-    RankCell()
+    RankCell(id: 523, name: "신민호", point: 89000)
 }
