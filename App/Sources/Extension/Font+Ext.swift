@@ -31,4 +31,8 @@ public extension Font {
         
         return font.swiftUIFont(size: size)
     }
+    
+    static func partial(size: CGFloat) -> Font {
+        return PieceFontFamily.PartialSansKR.regular.swiftUIFont(size: size)
+    }
 }

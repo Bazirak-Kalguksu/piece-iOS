@@ -56,9 +56,10 @@ struct SecondSignupView: View {
             Spacer()
             
             PieceButton(title: "회원가입") {
-                flow.popToRoot(animated: true)
+                signupVM.signup {
+                    flow.popToRoot(animated: true)
+                }
             }
-            
             Spacer()
         }
         .toolbar {

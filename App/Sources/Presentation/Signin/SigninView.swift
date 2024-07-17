@@ -5,6 +5,9 @@ struct SigninView: View {
     @StateObject var signinVM = SigninViewModel()
     @Flow var flow
     
+    @EnvironmentObject var mainVM: MainNavigationViewModel
+    
+    
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -37,11 +40,13 @@ struct SigninView: View {
             VStack(alignment: .trailing, spacing: 8) {
                 
                 PieceButton(title: "로그인") {
-                    if(signinVM.email.range(of: Regex.email, options: .regularExpression) != nil) {
-                        print("이메일")
-                    }
-                    else {
-                        print("올 ")
+                    signinVM.signin {
+                        mainVM.selection = .home
+                        mainVM.objectWillChange.send()
+                        
+                    } onError: {
+                        
+                        flow.alert(Alert(title: "계정이 존재하지 않습니다.", dismissButton: .cancel("확인")))
                     }
                 }
                 
@@ -54,7 +59,7 @@ struct SigninView: View {
                             FirstSignupView()
                                 .navigationBarBackButtonHidden(),
                             animated: false
-
+                            
                         )
                     } label: {
                         Text("회원가입")
@@ -71,6 +76,9 @@ struct SigninView: View {
 }
 
 #Preview {
-    FlowPresenter(rootView: SigninView())
+    FlowPresenter(
+        rootView: SigninView()
+            .environmentObject(MainNavigationViewModel())
+    )
     
 }

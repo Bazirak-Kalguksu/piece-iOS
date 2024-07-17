@@ -1,19 +1,24 @@
 import SwiftUI
-import Moya
 import FlowKit
 
 struct MainNavigationView: View {
     @Flow var flow
-    @State var isSign: Bool = false
+    
+    @StateObject var mainVM = MainNavigationViewModel()
     
     var body: some View {
-        if isSign {
-            HomeView()
-        }
-        else {
-            SigninView()
-
-        }
+            Group {
+                if mainVM.isSigned {
+                    MainTabView()
+                        .environmentObject(mainVM)
+                }
+                else {
+                    SigninView()
+                    
+                }
+            }
+            .environmentObject(mainVM)
+        
     }
 }
 

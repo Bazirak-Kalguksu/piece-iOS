@@ -6,7 +6,7 @@ let dependencies = Dependencies(
         [
             .remote(
                 url: "https://github.com/Alamofire/Alamofire.git",
-                requirement: .upToNextMinor(from: "5.0.0")
+                requirement: .branch("master")
             ),
             .remote(
                 url: "https://github.com/Moya/Moya.git",

@@ -1,14 +1,27 @@
 import SwiftUI
+import FlowKit
 
 struct HomeView: View {
+    
+    @Flow var flow
+    
     var body: some View {
+        VStack {
+            PieceSearchField(text: .constant(""))
+            
+            ScrollView {
+                
+            }
+            
+            
+        }
+   
         
-        PieceAsset.Icon.profile.swiftUIImage
-            .resizable()
-            .frame(width: 100, height: 100)
     }
 }
 
 #Preview {
-    HomeView()
+    NavigationView {
+        HomeView()
+    }
 }
