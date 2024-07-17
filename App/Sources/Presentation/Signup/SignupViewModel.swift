@@ -20,7 +20,7 @@ class SignupViewModel: ObservableObject {
         
         if let birth = birth {
             AF.request(
-                "\(Backet.BASE_URL)/auth/sign-up",
+                "\(Bucket.BASE_URL)/auth/sign-up",
                 method: .post,
                 parameters: [
                     "email": email,
@@ -36,7 +36,7 @@ class SignupViewModel: ObservableObject {
                 case .success(let data):
                     
                     
-                    print(data)
+                    print("signup \(data)")
                     
                     if data.status == 201 {
                         onComplete()

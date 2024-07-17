@@ -56,6 +56,7 @@ struct FirstSignupView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 PieceBackButton()
+                    
             }
         }
     }

@@ -1,4 +1,5 @@
 import SwiftUI
+import FlowKit
 
 enum TabItem: String {
     case rank = "랭킹"
@@ -8,6 +9,7 @@ enum TabItem: String {
 }
 
 struct MainTabView: View {
+    @Flow var flow
     @EnvironmentObject var mainVM: MainNavigationViewModel
 
     var body: some View {
@@ -32,7 +34,7 @@ struct MainTabView: View {
 
             
             ProfileView()
-                .environmentObject(mainVM)
+                
                 .tabItem {
                     Image(systemName: "person.circle")
                     
@@ -41,6 +43,8 @@ struct MainTabView: View {
                 .tag(TabItem.profile)
 
         }
+        .environmentObject(mainVM)
+
     }
 }
 

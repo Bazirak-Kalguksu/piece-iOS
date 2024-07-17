@@ -1,26 +1,36 @@
-//
-//  PointItem.swift
-//  piece
-//
-//  Created by minho shin on 7/17/24.
-//  Copyright © 2024 dev.minhoshin. All rights reserved.
-//
-
 import SwiftUI
 
+enum PointTitle: String {
+    case point = "포인트"
+    case valance = "나의 계좌"
+    
+    var suffix: String {
+        switch self {
+        case .point:
+            return "P"
+        case .valance:
+            return "원"
+        }
+    }
+}
+
 struct PointItem: View {
+    
+    let title: PointTitle
+    let value: Int
+    
     var body: some View {
         Button {
             
         } label: {
             
             HStack {
-                Text("포인트")
+                Text(title.rawValue)
                     .foregroundStyle(Color.black)
                 
                 Spacer()
                 
-                Text("101,200P")
+                Text("\(value)\(title.suffix)")
                     .foregroundStyle(Color.Blue.blue700)
                 
                 Spacer()
@@ -43,5 +53,5 @@ struct PointItem: View {
 }
 
 #Preview {
-    PointItem()
+    PointItem(title: .point, value: 10)
 }

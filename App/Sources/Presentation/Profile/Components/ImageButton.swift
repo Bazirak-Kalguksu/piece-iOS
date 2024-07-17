@@ -18,10 +18,10 @@ struct ImageButton: View {
                 .resizable()
                 .frame(maxWidth: 110, maxHeight: 110)
                 .foregroundStyle(Color.Blue.blue500)
-                .overlay {
-                    PieceAsset.Icon.plus.swiftUIImage
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                }
+//                .overlay {
+//                    PieceAsset.Icon.plus.swiftUIImage
+//                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+//                }
             
         }
     }

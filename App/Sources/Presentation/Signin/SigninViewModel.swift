@@ -7,7 +7,7 @@ class SigninViewModel: ObservableObject {
     
     func signin( onComplete: @escaping () -> (), onError: (() -> ())? ) {
         AF.request(
-            "\(Backet.BASE_URL)/auth/sign-in",
+            "\(Bucket.BASE_URL)/auth/sign-in",
             method: .post,
             parameters: [
                 "email": email,

@@ -5,23 +5,56 @@ struct HomeView: View {
     
     @Flow var flow
     
+    @EnvironmentObject var mainVM: MainNavigationViewModel
+    @StateObject var homeVM = HomeViewModel()
+    
+    
     var body: some View {
-        VStack {
+        VStack(spacing: 12) {
+            Rectangle()
+                .frame(maxHeight: 114)
+                .foregroundStyle(Color.Blue.blue500)
+                .overlay {
+                    VStack(spacing: 0) {
+                        Spacer()
+                        
+                        
+                        PieceAsset.Vector.homeLogo.swiftUIImage
+                            .resizable()
+                            .frame(maxWidth: 166, maxHeight: 42)
+                    }
+                    .padding(.vertical, 12)
+                }
+            
+            
             PieceSearchField(text: .constant(""))
             
             ScrollView {
+                Spacer(minLength: 10)
+                
+                VStack(spacing: 22) {
+                    ForEach(homeVM.campaigns, id: \.idx) { item in
+                        CampaignCell(model: item)
+                    }
+                }
+                
+                Spacer(minLength: 80)
                 
             }
-            
+                        
             
         }
-   
+        .onAppear {
+            homeVM.getCampaigns()
+        }
+        .ignoresSafeArea()
+
+        
+        
         
     }
 }
 
 #Preview {
-    NavigationView {
-        HomeView()
-    }
+    FlowPresenter(rootView: HomeView())
 }

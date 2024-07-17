@@ -1,15 +1,8 @@
-//
-//  ProfileView.swift
-//  piece
-//
-//  Created by minho shin on 7/17/24.
-//  Copyright © 2024 dev.minhoshin. All rights reserved.
-//
-
 import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var mainVM: MainNavigationViewModel
+    @StateObject var profileVM = ProfileViewModel()
     
     var body: some View {
         VStack(spacing: 26) {
@@ -18,15 +11,19 @@ struct ProfileView: View {
             
             ImageButton()
             
-            PointItem()
+            VStack(spacing: 12) {
+                PointItem(title: .point, value: profileVM.model.point)
+                
+                PointItem(title: .valance, value: profileVM.model.balance)
+            }
             
             ScrollView {
                 VStack(spacing: 0) {
-                    ProfileItem(title: .name, value: "권수현")
+                    ProfileItem(title: .name, value: profileVM.model.name)
                     
-                    ProfileItem(title: .birth, value: "2008.09.15")
+                    ProfileItem(title: .birth, value: profileVM.model.birth)
                     
-                    ProfileItem(title: .email, value: "tngus915@gmail.com")
+                    ProfileItem(title: .email, value: profileVM.model.email)
                     
                     ProfileItem(title: .signOut) {
                         if KeyChain.delete() {
@@ -40,6 +37,9 @@ struct ProfileView: View {
             }
             
             
+        }
+        .onAppear {
+            profileVM.getProfile()
         }
     }
 }

@@ -7,21 +7,16 @@ struct MainNavigationView: View {
     @StateObject var mainVM = MainNavigationViewModel()
     
     var body: some View {
-            Group {
-                if mainVM.isSigned {
-                    MainTabView()
-                        .environmentObject(mainVM)
-                }
-                else {
-                    SigninView()
-                    
-                }
+        Group {
+            if mainVM.isSigned {
+                MainTabView()
             }
-            .environmentObject(mainVM)
+            else {
+                SigninView()
+            }
+        }
+        .environmentObject(mainVM)
+       
         
     }
-}
-
-#Preview {
-    FlowPresenter(rootView: MainNavigationView())
 }
