@@ -4,6 +4,8 @@ import FlowKit
 struct CampaignCell: View {
     let model: CampaignResponse
     
+    @EnvironmentObject var profileVM: ProfileViewModel
+    
     @Flow var flow
     
     var body: some View {
@@ -39,15 +41,26 @@ struct CampaignCell: View {
                 Spacer()
                 
                 Button {
-                    
+                    profileVM.openSheet()
                 } label: {
-                    
                     Text("후원하기")
                         .font(.pretendard(size: 15, weight: .w500))
                         .foregroundStyle(Color.white)
                         .padding(20)
                         .background(Color.Blue.blue700.clipShape(RoundedRectangle(cornerRadius: 10)))
                 }
+                .sheet(isPresented: $profileVM.donationSheetCondition) {
+                    DonationView()
+                        .environmentObject(profileVM)
+                        
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([
+                        .height(300)
+                    ])
+                    
+                    
+                }
+                
                 
                 
             }
@@ -60,7 +73,11 @@ struct CampaignCell: View {
         .background(Color.Gray.gray100.clipShape(RoundedRectangle(cornerRadius: 10)))
         .padding(.horizontal, 10)
         .onTapGesture {
-            flow.push(CampaignView(model: model), animated: false)
+            flow.push(
+                CampaignView(model: model)
+                    .environmentObject(profileVM),
+                animated: false
+            )
         }
         
         

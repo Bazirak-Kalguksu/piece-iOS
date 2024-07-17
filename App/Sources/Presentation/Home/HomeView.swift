@@ -6,6 +6,8 @@ struct HomeView: View {
     @Flow var flow
     
     @EnvironmentObject var mainVM: MainNavigationViewModel
+    @EnvironmentObject var profileVM: ProfileViewModel
+
     @StateObject var homeVM = HomeViewModel()
     
     
@@ -35,6 +37,7 @@ struct HomeView: View {
                 VStack(spacing: 22) {
                     ForEach(homeVM.campaigns, id: \.idx) { item in
                         CampaignCell(model: item)
+                            .environmentObject(profileVM)
                             .task {
                                 if homeVM.hasReachedEnd(of: item) {
                                     await homeVM.nextCampaigns()

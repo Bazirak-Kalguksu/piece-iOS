@@ -11,6 +11,7 @@ enum TabItem: String {
 struct MainTabView: View {
     @Flow var flow
     @EnvironmentObject var mainVM: MainNavigationViewModel
+    @StateObject var profileVM = ProfileViewModel()
 
     var body: some View {
         
@@ -44,6 +45,7 @@ struct MainTabView: View {
 
         }
         .environmentObject(mainVM)
+        .environmentObject(profileVM)
 
     }
 }

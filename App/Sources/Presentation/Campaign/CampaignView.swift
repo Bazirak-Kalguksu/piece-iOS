@@ -3,9 +3,14 @@ import FlowKit
 
 struct CampaignView: View {
     
+    
     @Flow var flow
     
+    @EnvironmentObject var profileVM: ProfileViewModel
+    
     let model: CampaignResponse
+    
+    
     
     var body: some View {
         VStack(spacing: 10) {
@@ -49,7 +54,7 @@ struct CampaignView: View {
                 .foregroundStyle(Color.Blue.blue800)
             
             Button { 
-                
+                profileVM.openSheet()
             } label: {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(height: 60)
@@ -60,6 +65,18 @@ struct CampaignView: View {
                             .font(.pretendard(size: 18, weight: .w500))
                     }
             }
+            .sheet(isPresented: $profileVM.donationSheetCondition) {
+                DonationView()
+                    .environmentObject(profileVM)
+                    
+                .presentationDragIndicator(.visible)
+                .presentationDetents([
+                    .height(300)
+                ])
+                
+                
+            }
+            
             
             
             

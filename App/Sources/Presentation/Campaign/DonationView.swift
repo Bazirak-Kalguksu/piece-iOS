@@ -1,8 +1,12 @@
 import SwiftUI
+import FlowKit
 
 struct DonationView: View {
     
     @EnvironmentObject var profileVM: ProfileViewModel
+    
+    @Flow var flow
+    
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -30,10 +34,6 @@ struct DonationView: View {
             Text("\(profileVM.model.point) P")
                 .font(.pretendard(size: 36, weight: .w700))
             
-            
-            
-            
-            
             Spacer()
             
             RoundedRectangle(cornerRadius: 10)
@@ -43,7 +43,46 @@ struct DonationView: View {
                     HStack {
                         Spacer()
                         
-                        Text("포인트로 후원하기")
+                        Button {
+                            profileVM.donation(type: .point, value: 1000) {
+                                
+                                profileVM.donationSheetCondition = false
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    if !profileVM.donationSheetCondition {
+                                        
+                                        flow.alert(
+                                            Alert(
+                                                title: "완료!",
+                                                message: "후원이 완료되었습니다!",
+                                                dismissButton: .cancel("확인") {
+                                                    profileVM.getProfile()
+                                                    
+                                                }))
+                                        
+                                    }
+                                }
+                            } onError: {
+                                profileVM.donationSheetCondition = false
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    if !profileVM.donationSheetCondition {
+                                        
+                                        flow.alert(
+                                            Alert(
+                                                title: "실패",
+                                                message: "포인트가 부족합니다.",
+                                                dismissButton: .cancel("확인")
+                                                {
+                                                    
+                                                }))
+                                        
+                                    }
+                                }
+                            }
+                        } label: {
+                            Text("포인트로 후원하기")
+                        }
                         
                         Spacer()
                         
@@ -53,7 +92,44 @@ struct DonationView: View {
                         
                         Spacer()
                         
-                        Text("현금으로 후원하기")
+                        Button {
+                            profileVM.donation(type: .balance, value: 1000) {
+                                
+                                profileVM.donationSheetCondition = false
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    if !profileVM.donationSheetCondition {
+                                        flow.alert(
+                                            Alert(
+                                                title: "완료!",
+                                                message: "후원이 완료되었습니다!",
+                                                dismissButton: .cancel("확인") {
+                                                    profileVM.getProfile()
+                                                }))
+                                    }
+                                }
+                            } onError: {
+                                profileVM.donationSheetCondition = false
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                    if !profileVM.donationSheetCondition {
+                                        
+                                        flow.alert(
+                                            Alert(
+                                                title: "실패",
+                                                message: "잔액이 부족합니다.",
+                                                dismissButton: .cancel("확인") {
+                                                    
+                                                }))
+                                        
+                                    }
+                                }
+                            }
+                            
+                        } label: {
+                            Text("현금으로 후원하기")
+                        }
+                        
                         
                         Spacer()
                         

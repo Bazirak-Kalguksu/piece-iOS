@@ -3,7 +3,7 @@ import FlowKit
 
 struct ProfileView: View {
     @EnvironmentObject var mainVM: MainNavigationViewModel
-    @StateObject var profileVM = ProfileViewModel()
+    @EnvironmentObject var profileVM: ProfileViewModel
     
     @Flow var flow
     
